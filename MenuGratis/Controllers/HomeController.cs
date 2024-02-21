@@ -10,6 +10,7 @@ namespace MenuGratis.Controllers
     {
         public ActionResult Index()
         {
+            Console.WriteLine("Tkm");
             return View();
         }
 
