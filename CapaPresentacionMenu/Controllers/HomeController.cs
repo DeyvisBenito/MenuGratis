@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MenuGratis.Controllers
+namespace CapaPresentacionMenu.Controllers
 {
     public class HomeController : Controller
     {
