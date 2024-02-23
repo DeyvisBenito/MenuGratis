@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuGratis", "MenuGratis\Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaPresentacionMenu", "CapaPresentacionMenu\CapaPresentacionMenu.csproj", "{5274BBAB-740D-44C5-947A-30CF4B8E677A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaDatos", "CapaDatos\CapaDatos.csproj", "{6A02781E-BC55-460B-BC0B-F895892116A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaEntidad", "CapaEntidad\CapaEntidad.csproj", "{96EDE152-BA9A-44D6-A50C-215657435620}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{5274BBAB-740D-44C5-947A-30CF4B8E677A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5274BBAB-740D-44C5-947A-30CF4B8E677A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5274BBAB-740D-44C5-947A-30CF4B8E677A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A02781E-BC55-460B-BC0B-F895892116A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A02781E-BC55-460B-BC0B-F895892116A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A02781E-BC55-460B-BC0B-F895892116A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A02781E-BC55-460B-BC0B-F895892116A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96EDE152-BA9A-44D6-A50C-215657435620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96EDE152-BA9A-44D6-A50C-215657435620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96EDE152-BA9A-44D6-A50C-215657435620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96EDE152-BA9A-44D6-A50C-215657435620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
