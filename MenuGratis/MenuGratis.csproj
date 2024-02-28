@@ -201,6 +201,7 @@
     <Content Include="Content\brands.css" />
     <Content Include="Content\brands.min.css" />
     <Content Include="Content\css\Login.css" />
+    <Content Include="Content\css\Registro.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\regular.css" />
@@ -298,6 +299,7 @@
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Login\Ingreso.cshtml" />
     <Content Include="Views\Login\Registrar.cshtml" />
+    <Content Include="Views\Login\Registrar_Restaurante.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,46 +1,136 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
+<html lang="es">
 
-<html>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="~/Content/css/Login.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Website CSS style -->
+    <link href="~/Content/css/Registro.css" rel="stylesheet">
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+    <title>Admin</title>
 </head>
 <body>
-    <div id="login">
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="@Url.Action("Autenticar", "Login")" method="post">
-                            <h3 class="text-center text-info">Login</h3>
-                            <div class="form-group">
-                                <label for="username" class="text-info">Correo:</label><br>
-                                <input type="text" name="Correo" id="username" class="form-control">
+    <div class="container">
+        <div class="row main">
+            <div class="main-login main-center">
+                <h3>Registrate ahora y dale una mejor experiencia a tus comensales!</h3>
+                <form class="" method="post" action="#">
+
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Nombre</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" id="fname" placeholder="Ingresa tu Nombre" />
                             </div>
-                            <div class="form-group">
-                                <label for="password" class="text-info">Contraseña:</label><br>
-                                <input type="text" name="Contrasena" id="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <br />
-                                <input type="submit" name="button" class="btn btn-info btn-md" value="Ingresar">
-                            </div>
-                            <div id="register-link" class="text-right">
-                                No tienes cuenta?
-                                <a href="@Url.Action("Registrar", "Login")" class="text-info">Registrate aquí </a>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label for="last_name" class="cols-sm-2 control-label">Apellido</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Ingresa tu Apellido" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="cols-sm-2 control-label">Teléfono</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                <input type="number" class="form-control" name="phone" id="phone" placeholder="Ingresa tu Numero Teléfonico" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex" class="cols-sm-2 control-label">Sexo</label>
+                        <!-- jijijiji sex jiji-->
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-male fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="sex" id="male" placeholder="Ingresa tu sexo (M/F)" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Email</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Ingresa tu Email" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Contraseña</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Ingresa tu Contraseña" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm" class="cols-sm-2 control-label">Confirmación</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirma tu Contraseña" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="restaurant" class="cols-sm-2 control-label">Restaurante</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-cookie-bite fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="restaurant" id="restaurant" placeholder="Ingresa el Nombre de tu Restaurante" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <a href="@Url.Action("Ingreso", "Login")" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Regresar</a>
+                    </div>
+
+                    <div class="form-group ">
+                        <a href="@Url.Action("Registrar_Restaurante", "Login")" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Siguiente</a>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+
 </body>
 </html>
