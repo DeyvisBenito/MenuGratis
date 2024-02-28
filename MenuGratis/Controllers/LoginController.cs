@@ -45,6 +45,11 @@ namespace MenuGratis.Controllers
             return View();
         }
 
+        public ActionResult Registrar_Restaurante()
+        {
+            return View();
+        }
+
        // [HttpPost]
        // public ActionResult Registrar(Usuario oUsuario)
         //{
