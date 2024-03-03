@@ -27,15 +27,21 @@
     <div class="container">
         <div class="row main">
             <div class="main-login main-center">
+                @if (TempData["Registro"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["Registro"]
+                    </div>
+                }
                 <h3>Ingresa la ubicación de tu restaurante</h3>
-                <form class="" method="post" action="#">
+                <form id="formulario2" method="post" action="@Url.Action("RegistrarUsuario","Login")">
 
                     <div class="form-group">
                         <label for="country" class="cols-sm-2 control-label">Pais</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="name" id="fname" placeholder="Pais del restaurante" />
+                                <input type="text" class="form-control" name="pais" id="fname" placeholder="Pais del restaurante" required />
                             </div>
                         </div>
                     </div>
@@ -45,7 +51,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="dept" id="dept" placeholder="Departamento o Estado del Restaurante" />
+                                <input type="text" class="form-control" name="dept" id="dept" placeholder="Departamento o Estado del Restaurante" required />
                             </div>
                         </div>
                     </div>
@@ -55,7 +61,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-city fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="city" id="city" placeholder="Ciudad o Municipio del restaurante" />
+                                <input type="text" class="form-control" name="city" id="city" placeholder="Ciudad o Municipio del restaurante" required />
                             </div>
                         </div>
                     </div>
@@ -65,7 +71,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="zone" id="zone" placeholder="Zona" />
+                                <input type="text" class="form-control" name="zone" id="zone" placeholder="Zona" required />
                             </div>
                         </div>
                     </div>
@@ -75,7 +81,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="street" id="email" placeholder="Ingresa la Calle" />
+                                <input type="text" class="form-control" name="street" id="calle" placeholder="Ingresa la Calle" required />
                             </div>
                         </div>
                     </div>
@@ -84,8 +90,8 @@
                         <a href="@Url.Action("Registrar", "Login")" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Regresar</a>
                     </div>
 
-                    <div class="form-group ">
-                        <a href="@Url.Action("Registro_Restaurante", "Login")" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Registrar</a>
+                    <div class="form-group " id="button_Regis">
+                        <input type="submit" name="button_Regis" class="btn btn-primary btn-lg btn-block login-button" value="Registrar">
                     </div>
 
                 </form>
@@ -97,6 +103,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById("formulario2").addEventListener("submit", function (event) {
+            var pais = document.getElementById("fname").value;
+            var departamento = document.getElementById("dept").value;
+            var municipio = document.getElementById("city").value;
+            var zona = document.getElementById("zone").value;
+            var calle = document.getElementById("calle").value;
+
+            // Verificar que todos los campos estén completos y sean válidos
+            if (pais.trim() === "" || departamento.trim() === "" || municipio.trim() === "" || zona.trim() === "" || calle.trim() === "") {
+                alert("Por favor completa todos los campos antes de continuar.");
+                event.preventDefault(); // Detener el envío del formulario
+                return false;
+            }
+
+            // Si todos los campos son válidos, permitir el envío del formulario
+            return true;
+        });
+        }
+    </script>
 
     @Scripts.Render("~/bundles/complementos")
     @Scripts.Render("~/bundles/bootstrap")

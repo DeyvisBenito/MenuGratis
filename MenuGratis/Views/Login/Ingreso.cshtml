@@ -15,8 +15,22 @@
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Error"]
+                        </div>
+                    }@if (TempData["Confir"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["Confir"]
+                        </div>
+                    }
+
                     <div id="login-box" class="col-md-12">
+
                         <form id="login-form" class="form" action="@Url.Action("Autenticar", "Login")" method="post">
+
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Correo:</label><br>
@@ -26,14 +40,18 @@
                                 <label for="password" class="text-info">Contraseña:</label><br>
                                 <input type="password" name="Contrasena" id="password" class="form-control">
                             </div>
+
                             <div class="form-group">
+
                                 <br />
-                                 <input type="submit" name="button" class="btn btn-info btn-md" value="Ingresar">
+
+                                <input type="submit" name="button" class="btn btn-info btn-md" value="Ingresar">
                             </div>
                             <div id="register-link" class="text-right">
-                                No tienes cuenta? 
+                                No tienes cuenta?
                                 <a href="@Url.Action("Registrar", "Login")" class="text-info">Registrate aquí </a>
                             </div>
+
                         </form>
                     </div>
                 </div>

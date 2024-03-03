@@ -19,5 +19,8 @@ namespace CapaEntidad
         public string Restaurante { get; set; }
         public int Ubicacion { get; set; }
         public bool Restablecer { get; set; }
+        public DateTime fec_registro { get; set; }
+
+        public string confirmarContrasena { get; set; }
     }
 }

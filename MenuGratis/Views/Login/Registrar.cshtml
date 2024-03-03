@@ -27,25 +27,32 @@
     <div class="container">
         <div class="row main">
             <div class="main-login main-center">
+                @if (TempData["Confir"] != null)
+            {
+            <div class="alert alert-danger" role="alert">
+                @TempData["Confir"]
+            </div>
+            }
+                
                 <h3>Registrate ahora y dale una mejor experiencia a tus comensales!</h3>
-                <form class="" method="post" action="#">
+                <form id="formulario1" method="post" action="@Url.Action("AutentificarRegistro", "Login")">
 
                     <div class="form-group">
-                        <label for="name" class="cols-sm-2 control-label">Nombre</label>
+                        <label for="name" class="cols-sm-2 control-label">Nombres</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="name" id="fname" placeholder="Ingresa tu Nombre" />
+                                <input type="text" class="form-control" name="name" id="fname" placeholder="Ingresa tus Nombres" required />
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="last_name" class="cols-sm-2 control-label">Apellido</label>
+                        <label for="last_name" class="cols-sm-2 control-label">Apellidos</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Ingresa tu Apellido" />
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Ingresa tus Apellidos" required />
                             </div>
                         </div>
                     </div>
@@ -55,18 +62,22 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
-                                <input type="number" class="form-control" name="phone" id="phone" placeholder="Ingresa tu Numero Teléfonico" />
+                                <input type="tel" class="form-control" name="phone" id="phone" onkeypress="onlyNumbers(event)" maxlength="10" placeholder="Ingresa tu Número Telefónico" required />
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="sex" class="cols-sm-2 control-label">Sexo</label>
-                        <!-- jijijiji sex jiji-->
+
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-male fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="sex" id="male" placeholder="Ingresa tu sexo (M/F)" />
+                                <select class="form-control" name="sex" id="sex">
+                                    <option value="" selected disabled>Selecciona tu sexo</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -76,7 +87,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="email" id="email" placeholder="Ingresa tu Email" />
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Ingresa tu Email" required />
                             </div>
                         </div>
                     </div>
@@ -86,7 +97,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Ingresa tu Contraseña" />
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Ingresa tu Contraseña" required />
                             </div>
                         </div>
                     </div>
@@ -96,7 +107,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirma tu Contraseña" />
+                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirma tu Contraseña" required />
                             </div>
                         </div>
                     </div>
@@ -106,17 +117,18 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-cookie-bite fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="restaurant" id="restaurant" placeholder="Ingresa el Nombre de tu Restaurante" />
+                                <input type="text" class="form-control" name="restaurant" id="restaurant" placeholder="Ingresa el Nombre de tu Restaurante" required />
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group ">
-                        <a href="@Url.Action("Ingreso", "Login")" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Regresar</a>
+                        <a href="@Url.Action("Ingreso", "Login")" type="button" id="buttonre" class="btn btn-primary btn-lg btn-block login-button">Regresar</a>
+
                     </div>
 
-                    <div class="form-group ">
-                        <a href="@Url.Action("Registrar_Restaurante", "Login")" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Siguiente</a>
+                    <div class="form-group" id="buttonSig">
+                        <input type="submit" name="buttonSig" class="btn btn-primary btn-lg btn-block login-button" value="Siguiente">
                     </div>
 
                 </form>
@@ -129,8 +141,61 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="~/Scripts/bootstrap.min.js"></script>
 
+    <script>
+        // Función para permitir solo números en el campo de teléfono
+        function onlyNumbers(event) {
+            var charCode = (event.which) ? event.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                event.preventDefault();
+            }
+        }
+    </script>
+
+    <script>
+        document.getElementById("formulario1").addEventListener("submit", function (event) {
+            var nombre = document.getElementById("fname").value;
+            var apellido = document.getElementById("lname").value;
+            var telefono = document.getElementById("phone").value;
+            var sexo = document.getElementById("sex").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmar = document.getElementById("confirm").value;
+            var restaurante = document.getElementById("restaurant").value;
+
+            // Verificar que todos los campos estén completos y sean válidos
+            if (nombre.trim() === "" || apellido.trim() === "" || telefono.trim() === "" || sexo.trim() === "" || email.trim() === "" || password.trim() === "" || confirmar.trim() === "" || restaurante.trim() === "") {
+                alert("Por favor completa todos los campos antes de continuar.");
+                event.preventDefault(); // Detener el envío del formulario
+                return false;
+            }
+
+            // Verificar si las contraseñas coinciden
+            if (password !== confirmar) {
+                alert("Las contraseñas no coinciden. Por favor verifícalas.");
+                event.preventDefault(); // Detener el envío del formulario
+                return false;
+            }
+
+            // Verificar si el campo de email tiene un formato válido
+            if (!validateEmail(email)) {
+                alert("Por favor ingresa un email válido.");
+                event.preventDefault(); // Detener el envío del formulario
+                return false;
+            }
+
+            // Si todos los campos son válidos, permitir el envío del formulario
+            return true;
+        });
+
+        function validateEmail(email) {
+            //Modificar despues
+            return true; 
+        }
+    </script>
+
     @Scripts.Render("~/bundles/complementos")
     @Scripts.Render("~/bundles/bootstrap")
+
 
 </body>
 </html>

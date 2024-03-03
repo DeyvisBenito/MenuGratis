@@ -8,15 +8,15 @@ namespace MenuGratis.Filtros
 {
     public class ValidadSesionAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (HttpContext.Current.Session["Usuario"] == null)
-            {
-                filterContext.Result = new RedirectResult("~/Login/Ingreso");
-            }
+       // public override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{
+          //  if (HttpContext.Current.Session["Usuario"] == null)
+            //{
+              //  filterContext.Result = new RedirectResult("~/Login/Ingreso");
+            //}
 
-            base.OnActionExecuting(filterContext);
-        }
+            //base.OnActionExecuting(filterContext);
+       // }
 
     }
 }
