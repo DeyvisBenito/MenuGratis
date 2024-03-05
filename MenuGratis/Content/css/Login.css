@@ -1,8 +1,12 @@
 ﻿body {
-    margin: 0;
-    padding: 0;
+    background-image: url("https://images2.imgbox.com/79/38/RfxRMhP7_o.png");
+    background-repeat: no-repeat;
+    background-position: center, center;
     background-color: #17a2b8;
+    background-size: cover;
+    margin: auto;
     height: 100vh;
+    width: 100vw;
 }
 
 #login .container #login-row #login-column #login-box {
