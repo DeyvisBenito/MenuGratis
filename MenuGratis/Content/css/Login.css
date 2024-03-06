@@ -10,11 +10,19 @@
 }
 
 #login .container #login-row #login-column #login-box {
-    margin-top: 120px;
+    margin-top: 200px;
     max-width: 600px;
     height: 320px;
-    border: 1px solid #9C9C9C;
-    background-color: #EAEAEA;
+    border: 3px solid #9C9C9C;
+    background-color: #fff;
+
+    /* shadows and rounded borders */
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
     #login .container #login-row #login-column #login-box #login-form {
@@ -23,4 +31,5 @@
 
         #login .container #login-row #login-column #login-box #login-form #register-link {
             margin-top: -85px;
+            color: black;
         }

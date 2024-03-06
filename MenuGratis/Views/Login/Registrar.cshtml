@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     Layout = null;
 }
 
@@ -28,12 +28,12 @@
         <div class="row main">
             <div class="main-login main-center">
                 @if (TempData["Confir"] != null)
-            {
-            <div class="alert alert-danger" role="alert">
-                @TempData["Confir"]
-            </div>
-            }
-                
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["Confir"]
+                    </div>
+                }
+
                 <h3>Registrate ahora y dale una mejor experiencia a tus comensales!</h3>
                 <form id="formulario1" method="post" action="@Url.Action("AutentificarRegistro", "Login")">
 
@@ -122,13 +122,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="buttonSig">
-                        <input type="submit" name="buttonSig" class="btn btn-primary btn-lg btn-block submit-button" value="Siguiente">
+                    <div class="form-group ">
+                        <a href="@Url.Action("Ingreso", "Login")" type="button" id="buttonre" class="btn btn-primary btn-lg btn-block login-button">Regresar</a>
+
                     </div>
 
-                    <div class="form-group " id="buttonReg">
-                        <a href="@Url.Action("Ingreso", "Login")" type="button" id="buttonre" class="btn btn-primary btn-lg btn-block back-button">Regresar</a>
-
+                    <div class="form-group" id="buttonSig">
+                        <input type="submit" name="buttonSig" class="btn btn-primary btn-lg btn-block login-button" value="Siguiente">
                     </div>
 
                 </form>
@@ -189,7 +189,7 @@
 
         function validateEmail(email) {
             //Modificar despues
-            return true; 
+            return true;
         }
     </script>
 
