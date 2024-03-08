@@ -1,0 +1,24 @@
+﻿body {
+    background-image: url("https://images2.imgbox.com/80/9d/Woh5NK8j_o.png");
+    margin-top: 20px;
+    background-color: #f2f3f8;
+}
+
+.card {
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 10px solid #fff;
+    border-radius: .2rem;
+}
