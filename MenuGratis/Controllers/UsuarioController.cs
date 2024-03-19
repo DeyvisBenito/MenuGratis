@@ -57,7 +57,7 @@ namespace MenuGratis.Controllers
                 CD_Usuarios cD_Usuarios = new CD_Usuarios();
                 string conf=cD_Usuarios.ActualizarUsuario(oUser);
 
-                TempData["Confir"]= conf;
+                TempData["Actualizacion"]= conf;
                 return RedirectToAction("Index", "Home");
 
             }
