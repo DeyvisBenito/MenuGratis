@@ -8,6 +8,8 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Web;
 using System.Security.Cryptography;
+using Mysqlx.Cursor;
+using MySqlX.XDevAPI;
 
 namespace CapaDatos
 {
@@ -22,14 +24,14 @@ namespace CapaDatos
                 using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn)) {
                     string sql = "SELECT `ID`, `NOMBRE`, `APELLIDO`, `TELEFONO`, `SEXO`, `CORREO`, `CONTRASENA`, `RESTAURANTE`, `UBICACION_RESTAURANTE`, `RESTABLECER` FROM `restaurantes`";
 
-                    MySqlCommand cmd=new MySqlCommand(sql, oConexion);
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
                     cmd.CommandType = CommandType.Text;
 
                     oConexion.Open();
 
-                    using(MySqlDataReader dr= cmd.ExecuteReader())
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
                     {
-                        while(dr.Read())
+                        while (dr.Read())
                         {
                             lista.Add(
                                 new Usuario()
@@ -45,7 +47,7 @@ namespace CapaDatos
                                     Ubicacion = Convert.ToInt32(dr["UBICACION_RESTAURANTE"]),
                                     Restablecer = Convert.ToBoolean(dr["RESTABLECER"])
                                 }
-                                ) ;
+                                );
                         }
                     }
                 }
@@ -125,11 +127,125 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones
-                Console.WriteLine("Error al insertar usuario: " + ex.Message);
+
             }
         }
 
+        public string ActualizarUsuario(Usuario oUsuario)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "UPDATE `restaurantes` " +
+                    "SET `NOMBRE` = @nombre, " +
+                    "`APELLIDO` = @apellido, " +
+                    "`TELEFONO` = @telefono, " +
+                    "`SEXO` = @sexo, " +
+                    "`RESTAURANTE` = @restaurante " +
+                    "WHERE `ID` = @id";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
+                    cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
+                    cmd.Parameters.AddWithValue("@telefono", oUsuario.Telefono);
+                    cmd.Parameters.AddWithValue("@sexo", oUsuario.Sexo);
+                    cmd.Parameters.AddWithValue("@restaurante", oUsuario.Restaurante);
+                    cmd.Parameters.AddWithValue("@id", oUsuario.ID);
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    oConexion.Close();
+
+                    return ("Actualizacion completada");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return ("Ha ocurrido un error con la actualizacion");
+            }
+
+        }
+
+        public string ActualizarUbicacion(Ubicacion oUbicacion)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "UPDATE `ubicaciones` " +
+                    "SET `PAIS` = @pais, " +
+                    "`DEPARTAMENTO` = @depa, " +
+                    "`MUNICIPIO` = @muni, " +
+                    "`ZONA` = @zona, " +
+                    "`CALLE` = @calle " +
+                    "WHERE `ID_RES` = @id";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@pais", oUbicacion.Pais);
+                    cmd.Parameters.AddWithValue("@depa", oUbicacion.Departamento);
+                    cmd.Parameters.AddWithValue("@muni", oUbicacion.Municipio);
+                    cmd.Parameters.AddWithValue("@zona", oUbicacion.Zona);
+                    cmd.Parameters.AddWithValue("@calle", oUbicacion.Calle);
+                    cmd.Parameters.AddWithValue("@id", oUbicacion.Id_res);
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    oConexion.Close();
+
+                    return ("Actualizacion completada");
+
+                }
+
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public Ubicacion buscarUbicacion(int id)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "SELECT * FROM `ubicaciones` WHERE `ID_RES` = @idUbicacion";
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.Parameters.AddWithValue("@idUbicacion", id);
+
+                    oConexion.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            Ubicacion oUbicacion = new Ubicacion();
+                            oUbicacion.Id_res = Convert.ToInt32(dr["ID_RES"]);
+                            oUbicacion.Pais = dr["PAIS"].ToString();
+                            oUbicacion.Departamento = dr["DEPARTAMENTO"].ToString();
+                            oUbicacion.Municipio = dr["MUNICIPIO"].ToString();
+                            oUbicacion.Zona = dr["ZONA"].ToString();
+                            oUbicacion.Calle = dr["CALLE"].ToString();
+                            return (oUbicacion);
+                        }
+                    }
+                    oConexion.Close();
+
+                }
+                return null;
+            }catch(Exception e)
+            {
+                return null;
+            }
+        }
+
+
+    
 
         public string GetSHA256Hash(string input) //Convertira una contrasena en SHA256
         {

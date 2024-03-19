@@ -1,14 +1,14 @@
-﻿@{
+﻿﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="es">
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
+<html lang="es">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,12 +28,12 @@
         <div class="row main">
             <div class="main-login main-center">
                 @if (TempData["Confir"] != null)
-            {
-            <div class="alert alert-danger" role="alert">
-                @TempData["Confir"]
-            </div>
-            }
-                
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["Confir"]
+                    </div>
+                }
+
                 <h3>Registrate ahora y dale una mejor experiencia a tus comensales!</h3>
                 <form id="formulario1" method="post" action="@Url.Action("AutentificarRegistro", "Login")">
 
@@ -189,7 +189,7 @@
 
         function validateEmail(email) {
             //Modificar despues
-            return true; 
+            return true;
         }
     </script>
 

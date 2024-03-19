@@ -1,0 +1,164 @@
+﻿﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<!-- Website CSS style -->
+<link href="~/Content/css/Modificacion.css" rel="stylesheet">
+<!-- Website Font style -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Actualizar Datos</title>
+
+    <!-- Script para la funcion de alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                <form id="formulario1" method="post" action="@Url.Action("GuardarUpdateUbica", "Usuario")">
+
+                                    <div class="text-center mt-4">
+                                        <h1 class="h2">Actualiza los datos de tu restaurante</h1>
+                                        <p class="lead">
+                                            ¡Actualiza tus datos para una mejor experiencia!
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pais</label>
+                                        <input class="form-control form-control-lg" type="text" name="country" placeholder="Pais de tu Restaurante" value="@Model.Pais" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Departamento o Estado</label>
+                                        <input class="form-control form-control-lg" type="text" name="state" placeholder="Departamento o Estado de tu Restaurante" value="@Model.Departamento" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Municipio o Ciudad</label>
+                                        <input class="form-control form-control-lg" type="text" name="city" placeholder="Municipio o Ciudad de tu Restaurante" value="@Model.Municipio" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Zona</label>
+                                        <input class="form-control form-control-lg" type="text" name="adress" placeholder="Zona en la que se Ubica tu Restaurante" value="@Model.Zona" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Calle</label>
+                                        <input class="form-control form-control-lg" type="text" name="street" placeholder="Calle en la que se Ubica tu Restaurante" value="@Model.Calle" required>
+                                    </div>
+                                    <div class="form-group" id="buttonSig">
+                                        <input type="submit" name="buttonSig" class="btn btn-lg btn-primary" value="Actualizar">
+                                    </div>
+                                    <div class="form-group ">
+                                        <a id="buttonre" href="@Url.Action("Index", "Home")" type="button" onclick="showAlertCancelar(this)" class="btn btn-lg btn-primary">Cancelar</a>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+        // Adjunta el detector de eventos usando DOMContentLoaded para asegurar que el elemento esté disponible
+        document.addEventListener('DOMContentLoaded', function () {
+            const botonEnviar = document.querySelector('#myForm input[type="submit"]');
+            botonEnviar.addEventListener('click', showAlertConfirmar);
+            showAlertConfirmar(event);
+        });
+         // Alerta confirmar
+        function showAlertConfirmar() {
+            if (confirm("¿Estás seguro de que quieres actualizar?")) {
+                var pais = document.getElementById("country").value;
+                var departamento = document.getElementById("state").value;
+                var municipio = document.getElementById("city").value;
+                var zona = document.getElementById("adress").value;
+                var calle = document.getElementById("street").value;
+
+                // Verificar que todos los campos estén completos y sean válidos
+                if (pais.trim() === "" || departamento.trim() === "" || municipio.trim() === "" || zona.trim() === "" || calle.trim() === "") {
+                    alert("Por favor completa todos los campos antes de continuar.");
+                    event.preventDefault(); // Detener el envío del formulario
+                    return false;
+                } else {
+                    // Si todos los campos están completos y válidos, enviar el formulario
+                    document.getElementById("formulario1").submit();
+                }
+
+                var mensajeConfirmacion = '@TempData["Confir"]';
+                Swal.fire({
+                    title: mensajeConfirmacion,
+                    icon: 'success',
+                });
+            }
+        }
+        //Alerta cancelar (añadir logica despues)
+        function showAlertCancelar() {
+            event.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro de que desea cancelar?',
+                icon: 'question',
+                showCancelButton: 'true',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Obtener la URL de redirección del enlace "Cancelar"
+                    const redirectUrl = document.getElementById("buttonre").getAttribute("href");
+
+                    // Redirigir a la URL obtenida del enlace "Cancelar"
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
+                }
+            });
+        }
+        //Alerta de error (añadir logica despues)
+        function showAlertError() {
+            Swal.fire({
+                title: 'Ha ocurrido un error en la actualizacion de sus datos :(',
+                icon: 'warning',
+            })
+        }
+    </script>
+
+    <script>
+        // Función para permitir solo números en el campo de teléfono
+        function onlyNumbers(event) {
+            var charCode = (event.which) ? event.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                event.preventDefault();
+            }
+        }
+    </script>
+
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+</body>
+</html>

@@ -15,12 +15,17 @@ body, html {
 
 .main {
     margin-top: 70px;
+    margin-bottom: 70px;
 }
 
 h1.title {
     font-size: 50px;
     font-family: 'Passion One', cursive;
     font-weight: 400;
+}
+
+h3{
+    margin-top: 1px;
 }
 
 hr {
@@ -33,7 +38,7 @@ hr {
 }
 
 label {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 input,
@@ -60,11 +65,19 @@ input::-webkit-input-placeholder {
     padding: 40px 40px;
 }
 
-.login-button {
-    margin-top: 5px;
+.submit-button {
+    margin-top: 20px;
+    background-color: lightgreen;
+    color: black;
+}
+
+.back-button {
+    margin-top: 20px;
+    background-color: lightpink ;
+    color: black;
 }
 
 .login-register {
-    font-size: 11px;
+    font-size: 15px;
     text-align: center;
 }
