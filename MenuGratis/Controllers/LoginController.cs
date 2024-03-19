@@ -9,7 +9,6 @@ using MenuGratis.Controllers;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
 using System.Text;
-using CapaEntidad;
 
 namespace MenuGratis.Controllers
 {
