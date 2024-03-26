@@ -2,11 +2,45 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>TKMMMMMMMMMMMMMMM</h1>
+<!DOCTYPE html>
 
-</div>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MenuGratis</title>
+    <!-- Script para la funcion de alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="row">
- 
-</div>
+</head>
+<body>
+    <!-- Funcion de notificacion de bienvenida al usuario (mandala a llamar donde veas apropiado tkm) -->
+    <script>
+        function showAlertBienvenida() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Ingreso exitoso"
+            });
+        }
+        showAlertBienvenida();
+    </script>
+
+    <div class="jumbotron">
+        <h1>TKMMMMMMMMMMMMMMM</h1>
+    </div>
+    <div class="row">
+
+    </div>
+
+</body>
+</html>

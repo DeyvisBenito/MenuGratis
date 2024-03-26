@@ -31,6 +31,11 @@ namespace MenuGratis.Controllers
             return View();
         }
 
+        public ActionResult Platillos()
+        {
+            return View();
+        }
+
         public ActionResult CerrarSesion()
         {
             Session["Usuario"] = null;
