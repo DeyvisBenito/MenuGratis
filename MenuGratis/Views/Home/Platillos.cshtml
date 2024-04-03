@@ -13,7 +13,9 @@
 
 </head>
 <body>
+
     <button onclick="mostrarFormulario()">Formulario</button>
+
     <script>
         // Funcion alerta con formulario
         function mostrarFormulario() {
@@ -21,7 +23,8 @@
                 title: 'Ingrese los detalles de su platillo',
                 html:
                     '<input id="nombre" class="swal2-input" placeholder="Nombre">' +
-                    '<textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>'   +
+                    '<textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>' +
+                    '<input id="nombre" class="swal2-input" type="number" placeholder="Precio">' +
                     '<select id="opciones" class="swal2-select">' +
                     '<option value="" disabled selected>Selecciona el tipo de platillo</option>' +
                     '<option value="opcion1">Desayuno</option>' +
@@ -36,12 +39,14 @@
                 preConfirm: () => {
                     const nombre = Swal.getPopup().querySelector('#nombre').value;
                     const descripcion = Swal.getPopup().querySelector('#descripcion').value;
+                    const precio = Swal.getPopup().querySelector('#precio').value;
                     const opcionSeleccionada = Swal.getPopup().querySelector('#opciones').value;
                     const imagen = Swal.getPopup().querySelector('#imagen').files[0];
 
 
                     console.log('Nombre:', nombre);
                     console.log('Descripción:', descripcion);
+                    console.log('Precio:', precio);
                     console.log('Opción seleccionada:', opcionSeleccionada);
                     console.log('Imagen:', imagen);
                 }
