@@ -302,7 +302,10 @@
     <Content Include="Content\brands.min.css" />
     <Content Include="Content\css\Login.css" />
     <Content Include="Content\css\Modificacion.css" />
+    <Content Include="Content\css\presentarPro.css" />
     <Content Include="Content\css\Registro.css" />
+    <Content Include="Content\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\datatables\js\jquery.dataTables.min.js" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\regular.css" />
@@ -389,6 +392,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\scriptsPla.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -400,8 +405,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\mostrarDe.cshtml" />
+    <Content Include="Views\Home\mostEnt.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
@@ -423,7 +428,10 @@
     <Content Include="Views\Login\Registrar_Restaurante.cshtml" />
     <Content Include="Views\Usuario\ModRestaurante.cshtml" />
     <Content Include="Views\Usuario\ModUsuario.cshtml" />
-    <Content Include="Views\Home\Platillos.cshtml" />
+    <Content Include="Views\Home\ListarPlatillo.cshtml" />
+    <Content Include="Views\Home\mostPlaF.cshtml" />
+    <Content Include="Views\Home\mostPost.cshtml" />
+    <Content Include="Views\Home\mostBebi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
