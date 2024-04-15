@@ -97,6 +97,7 @@ namespace CapaDatos
 
         public void InsertarUsuario(Usuario oUsuario, int idUbicacion) //Haciendo insercion del usuario a la base de datos
         {
+            int ultimoIDr = 0;
             try
             {
                 string contrasenaHA256 = GetSHA256Hash(oUsuario.Contrasena);
@@ -104,7 +105,7 @@ namespace CapaDatos
                 {
                     string sql = "INSERT INTO `restaurantes` " +
                                  "(`NOMBRE`, `APELLIDO`, `TELEFONO`, `SEXO`, `CORREO`,`CONTRASENA`, `RESTAURANTE`, `UBICACION_RESTAURANTE`, `RESTABLECER`, `FEC_REGISTRO` ) " +
-                                 "VALUES (@nombre, @apellido, @telefono, @sexo, @correo, @contrasena, @restaurante, @ubicacion, @restablecer, @fecha)";
+                                 "VALUES (@nombre, @apellido, @telefono, @sexo, @correo, @contrasena, @restaurante, @ubicacion, @restablecer, @fecha); SELECT LAST_INSERT_ID();";
 
                     MySqlCommand cmd = new MySqlCommand(sql, oConexion);
                     cmd.CommandType = CommandType.Text;
@@ -121,6 +122,41 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@fecha", oUsuario.fec_registro);
 
                     oConexion.Open();
+                    ultimoIDr = Convert.ToInt32(cmd.ExecuteScalar());
+                    InsertarMenu(ultimoIDr, oUsuario.Restaurante);
+                    oConexion.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+
+        public void InsertarMenu(int id, string rest) //Haciendo insercion del menu
+        {
+            try
+            {
+                string nombre = string.Concat(rest, "_menu");
+
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "INSERT INTO `menus` " +
+                                 "(`ID_RES`, `NOMBRE`, `FECHA_INICIO` ) " +
+                                 "VALUES (@id_res, @nombre, @fecha)";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@id_res", id);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
+                    
+
+                    oConexion.Open();
                     cmd.ExecuteNonQuery();
                     oConexion.Close();
                 }
@@ -129,6 +165,42 @@ namespace CapaDatos
             {
 
             }
+        }
+
+        public int BuscarMenu(int id) //Buscando el menu dependiendo el Id del restaurante
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "SELECT * FROM `menus` WHERE `ID_RES` = @idRes";
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.Parameters.AddWithValue("@idRes", id);
+
+                    oConexion.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            Menus oMenus = new Menus();
+                            oMenus.Id_menu = Convert.ToInt32(dr["ID_MENU"]);
+                            oMenus.Id_res = Convert.ToInt32(dr["ID_RES"]);
+                            oMenus.Nombre = dr["NOMBRE"].ToString();
+                            
+                            return oMenus.Id_menu;
+                        }
+                    }
+                    oConexion.Close();
+
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+
+            
         }
 
         public string ActualizarUsuario(Usuario oUsuario)

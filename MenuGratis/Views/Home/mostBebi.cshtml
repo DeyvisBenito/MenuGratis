@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/Content/css/presentarPro.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div>
+        <h1>Bebidas</h1>
+    </div>
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @{
+                    var bandera = true;
+                }
+                @foreach (var platillo in Model)
+                {
+                    if (platillo.Tipo == "Bebida")
+                    {
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="data:image/jpeg;base64,@(Convert.ToBase64String(platillo.Imagen))" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">@platillo.Nombre</h5>
+                                        <!-- Product price-->
+                                        Q.@platillo.precio
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="mostrar_descr(@platillo.Id_platillo)">Ver más</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        bandera = false;
+                    }
+
+
+                }
+
+                @if (bandera)
+                {
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <h3>
+                                Ningun platillo registrado en esta seccion
+                            </h3>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Funcion alerta con formulario
+    function mostrar_descr(Id_platillo) {
+        // Hacer una llamada AJAX para obtener los detalles del platillo
+        $.ajax({
+            url: '@Url.Action("detallarPlatillo", "Home")',
+            type: 'GET',
+            data: { Id_platillo: Id_platillo },
+            success: function (response) {
+                if (response) {
+                    // Llenar el modal con los detalles del platillo
+                    Swal.fire({
+                        title: 'Descripcion del platillo',
+                        html:
+                            '<div> <label id="nombre" class="swal2-input">' + response.Nombre + '</label> </div>' +
+                            '<div> <textarea id="descripcion" class="swal2-textarea" readonly>' + response.Descripcion + '</textarea> </div>' +
+                            '<div> <label id="precio" class="swal2-input"> Q. ' + response.precio + '</label> </div>' +
+                            '<div> <img id="imagenActual" src="data:image/jpeg;base64,' + response.ImagenBase64 + '" style="max-width: 200px; max-height: 200px;" /> </div>',
+                        confirmButtonText: 'Salir',
+
+                    });
+
+
+                } else {
+                    // Mostrar mensaje de error si no se encontraron detalles del platillo
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se encontraron detalles del platillo.'
+                    });
+                }
+            },
+
+
+            error: function (xhr, status, error) {
+                // Mostrar mensaje de error en caso de fallo de la llamada AJAX
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al obtener los detalles del platillo.'
+                });
+            }
+        });
+    }
+    </script>
+
+</body>
+</html>
