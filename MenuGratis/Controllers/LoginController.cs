@@ -35,7 +35,7 @@ namespace MenuGratis.Controllers
                     // Si encontramos un usuario y contraseña correctos, almacenamos el usuario en la sesión
                     Session["Usuario"] = user;
                     // Redireccionar directamente a la acción Index del controlador Home
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ListarPlatillo", "Home");
                 }
             }
 

@@ -14,7 +14,7 @@ namespace CapaEntidad
         public string Descripcion { get; set; }
         public string Tipo { get; set; }
         public double precio { get; set; }
-        public byte[] Imagen { get; set; }
-        public string ImagenBase64 { get; set; }
+        public string Imagen { get; set; }
+
     }
 }

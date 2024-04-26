@@ -96,6 +96,7 @@
     <Compile Include="Menus.cs" />
     <Compile Include="Platillos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Secciones.cs" />
     <Compile Include="Ubicacion.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

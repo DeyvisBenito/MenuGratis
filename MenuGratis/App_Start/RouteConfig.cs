@@ -16,7 +16,7 @@ namespace MenuGratis
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Ingreso", id = UrlParameter.Optional }
             );
         }
     }

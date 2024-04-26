@@ -37,7 +37,7 @@
                 <form id="formulario2" method="post" action="@Url.Action("RegistrarUsuario","Login")">
 
                     <div class="form-group">
-                        <label for="country" class="cols-sm-2 control-label">Pais</label>
+                        <label for="fname" class="cols-sm-2 control-label">Pais</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-flag fa" aria-hidden="true"></i></span>
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="street" class="cols-sm-2 control-label">Calle</label>
+                        <label for="calle" class="cols-sm-2 control-label">Calle</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map fa" aria-hidden="true"></i></span>
@@ -122,7 +122,7 @@
             // Si todos los campos son válidos, permitir el envío del formulario
             return true;
         });
-        }
+        
     </script>
 
     @Scripts.Render("~/bundles/complementos")

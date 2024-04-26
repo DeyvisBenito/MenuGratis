@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using MenuGratis.Filtros;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MenuGratis
@@ -8,6 +9,8 @@ namespace MenuGratis
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            
         }
     }
 }

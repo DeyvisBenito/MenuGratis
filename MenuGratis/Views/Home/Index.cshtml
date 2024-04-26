@@ -13,34 +13,135 @@
 
 </head>
 <body>
-    <!-- Funcion de notificacion de bienvenida al usuario (mandala a llamar donde veas apropiado tkm) -->
-    <script>
-        function showAlertBienvenida() {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
+
+    <div>
+        <h1>@ViewBag.Section.Nombre</h1>
+    </div>
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @{
+                    var bandera = true;
                 }
-            });
-            Toast.fire({
-                icon: "success",
-                title: "Ingreso exitoso"
-            });
-        }
-        showAlertBienvenida();
+                @foreach (var platillo in Model)
+                {
+                    if (platillo.Tipo == ViewBag.Section.Nombre)
+                    {
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="@((platillo.Imagen))" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">@platillo.Nombre</h5>
+                                        <!-- Product price-->
+                                        Q.@platillo.precio
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="mostrar_descr(@platillo.Id_platillo)">Ver más</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        bandera = false;
+                    }
+
+
+                }
+
+                @if (bandera)
+                {
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <h3>
+                                Ningun platillo registrado en esta seccion
+                            </h3>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+    // Funcion alerta con formulario
+    function mostrar_descr(Id_platillo) {
+        // Hacer una llamada AJAX para obtener los detalles del platillo
+        $.ajax({
+            url: '@Url.Action("detallarPlatillo", "Home")',
+            type: 'GET',
+            data: { Id_platillo: Id_platillo },
+            success: function (response) {
+                if (response) {
+                    // Llenar el modal con los detalles del platillo
+                    Swal.fire({
+                        title: 'Descripcion del platillo',
+                        html:
+                            '<div> <label id="nombre" class="swal2-input">' + response.Nombre + '</label> </div>' +
+                            '<div> <textarea id="descripcion" class="swal2-textarea" readonly>' + response.Descripcion + '</textarea> </div>' +
+                            '<div> <label id="precio" class="swal2-input"> Q. ' + response.precio + '</label> </div>' +
+                            '<div> <img id="imagenActual" src="' + response.Imagen + '" style="max-width: 200px; max-height: 200px;" /> </div>',
+                        confirmButtonText: 'Salir',
+
+                    });
+
+
+                } else {
+                    // Mostrar mensaje de error si no se encontraron detalles del platillo
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se encontraron detalles del platillo.'
+                    });
+                }
+            },
+
+
+            error: function (xhr, status, error) {
+                // Mostrar mensaje de error en caso de fallo de la llamada AJAX
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al obtener los detalles del platillo.'
+                });
+            }
+        });
+    }
     </script>
 
-    <div class="jumbotron">
-        <h1>TKMMMMMMMMMMMMMMM</h1>
-    </div>
-    <div class="row">
 
-    </div>
+
+    <!-- Mostrar más detalles de la sección según tu modelo -->
+    <!-- Funcion de notificacion de bienvenida al usuario (mandala a llamar donde veas apropiado tkm) -->
+    @*<script>
+            function showAlertBienvenida() {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Ingreso exitoso"
+                });
+            }
+            showAlertBienvenida();
+        </script>*@
+
+
 
 </body>
 </html>

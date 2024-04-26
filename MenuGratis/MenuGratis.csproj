@@ -405,8 +405,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\mostrarDe.cshtml" />
-    <Content Include="Views\Home\mostEnt.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
@@ -429,12 +427,10 @@
     <Content Include="Views\Usuario\ModRestaurante.cshtml" />
     <Content Include="Views\Usuario\ModUsuario.cshtml" />
     <Content Include="Views\Home\ListarPlatillo.cshtml" />
-    <Content Include="Views\Home\mostPlaF.cshtml" />
-    <Content Include="Views\Home\mostPost.cshtml" />
-    <Content Include="Views\Home\mostBebi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Platillos\" />
     <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
