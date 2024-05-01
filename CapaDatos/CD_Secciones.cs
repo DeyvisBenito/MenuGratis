@@ -122,5 +122,59 @@ namespace CapaDatos
             }
             return null;
         }
+
+        public bool editarSeccion(Secciones sec)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "UPDATE `secciones` " +
+                        "SET `NOMBRE` = @nombre " +
+                        "WHERE `ID_SE` = @id";
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.Parameters.AddWithValue("@nombre", sec.Nombre);
+                    cmd.Parameters.AddWithValue("@id", sec.Id_se);
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    oConexion.Close();
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool eliminarSeccion(int Id_se)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "DELETE FROM `secciones` " +
+                                 " WHERE `ID_SE` = @id ";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@id", Id_se);
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    oConexion.Close();
+
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

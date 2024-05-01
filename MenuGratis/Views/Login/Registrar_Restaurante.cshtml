@@ -9,6 +9,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,12 +28,7 @@
     <div class="container">
         <div class="row main">
             <div class="main-login main-center">
-                @if (TempData["Registro"] != null)
-                {
-                    <div class="alert alert-danger" role="alert">
-                        @TempData["Registro"]
-                    </div>
-                }
+
                 <h3>Ingresa la ubicación de tu restaurante</h3>
                 <form id="formulario2" method="post" action="@Url.Action("RegistrarUsuario","Login")">
 
@@ -104,26 +100,13 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="~/Scripts/bootstrap.min.js"></script>
 
-    <script>
-        document.getElementById("formulario2").addEventListener("submit", function (event) {
-            var pais = document.getElementById("fname").value;
-            var departamento = document.getElementById("dept").value;
-            var municipio = document.getElementById("city").value;
-            var zona = document.getElementById("zone").value;
-            var calle = document.getElementById("calle").value;
 
-            // Verificar que todos los campos estén completos y sean válidos
-            if (pais.trim() === "" || departamento.trim() === "" || municipio.trim() === "" || zona.trim() === "" || calle.trim() === "") {
-                alert("Por favor completa todos los campos antes de continuar.");
-                event.preventDefault(); // Detener el envío del formulario
-                return false;
-            }
 
-            // Si todos los campos son válidos, permitir el envío del formulario
-            return true;
-        });
-        
-    </script>
+
+
+
+    <script src="@Url.Content("~/Scripts/Views/Login/Registrar_Restaurante.js")" type="text/javascript"></script>
+
 
     @Scripts.Render("~/bundles/complementos")
     @Scripts.Render("~/bundles/bootstrap")

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CapaDatos;
 using CapaEntidad;
 using MenuGratis.Filtros;
+using Microsoft.Ajax.Utilities;
 
 namespace MenuGratis.Controllers
 {
@@ -34,17 +35,17 @@ namespace MenuGratis.Controllers
                     }
 
                     // Si no se encuentra el usuario en la lista, redirigir al login
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Ingreso", "Login");
                 }
             
             catch
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Ingreso", "Login");
             }
         }
 
         [HttpPost]
-        public ActionResult GuardarUpdate(string name, string lname, string sex, string phone, string restaurant)
+        public JsonResult GuardarUpdate(string name, string lname, string sex, string phone, string restaurant)
         {
             try
             {
@@ -55,15 +56,23 @@ namespace MenuGratis.Controllers
                 oUser.Telefono = phone;
                 oUser.Restaurante= restaurant;
                 CD_Usuarios cD_Usuarios = new CD_Usuarios();
-                string conf=cD_Usuarios.ActualizarUsuario(oUser);
+                bool conf=cD_Usuarios.ActualizarUsuario(oUser);
 
-                TempData["Actualizacion"]= conf;
-                return RedirectToAction("Index", "Home");
+                if (conf)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+                
+               
 
             }
-            catch
+            catch (Exception ex)
             {
-                return RedirectToAction("Index", "Home");
+                return Json(new { success = false, error = ex.Message }); 
             }
 
         }
@@ -83,18 +92,18 @@ namespace MenuGratis.Controllers
                 }
 
                 // Si no se encuentra el usuario en la lista, redirigir al login
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Ingreso", "Login");
             }
 
             catch
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Ingreso", "Login");
             }
         }
 
 
         [HttpPost]
-        public ActionResult GuardarUpdateUbica(string country, string state, string city, string adress, string street)
+        public JsonResult GuardarUpdateUbica(string country, string state, string city, string adress, string street)
         {
             try
             {
@@ -107,13 +116,23 @@ namespace MenuGratis.Controllers
                 oUbi.Calle = street;
                 oUbi.Id_res = oUser.Ubicacion;
                 CD_Usuarios oCD_U = new CD_Usuarios();
-                string conf=oCD_U.ActualizarUbicacion(oUbi);
+                bool conf=oCD_U.ActualizarUbicacion(oUbi);
 
-                return RedirectToAction("Index", "Home");
+                if (conf)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+               
 
-            }catch(Exception ex)
+
+            }
+            catch(Exception ex)
             {
-                return RedirectToAction("Index", "Home");
+                return Json(new { success = false, error = ex.Message });
             }
         }
 

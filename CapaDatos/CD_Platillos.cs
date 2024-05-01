@@ -159,6 +159,38 @@ namespace CapaDatos
 
         }
 
+        public bool modificarPlatillo(string sec, string nombreOrig)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "UPDATE `platillos` " +
+                                 "SET `TIPO` = @tipo  " +
+                                 " WHERE `TIPO` = @sec";
+
+
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@tipo", sec);
+                    cmd.Parameters.AddWithValue("@sec", nombreOrig);
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    oConexion.Close();
+
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
         public bool eliminarPlatillo(int Id_platillo)
         {
             try
@@ -172,6 +204,34 @@ namespace CapaDatos
                     cmd.CommandType = CommandType.Text;
 
                     cmd.Parameters.AddWithValue("@id", Id_platillo);
+
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    oConexion.Close();
+
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
+        public bool eliminarPlatillo(string Nombre)
+        {
+            try
+            {
+                using (MySqlConnection oConexion = new MySqlConnection(Conexion.cn))
+                {
+                    string sql = "DELETE FROM `platillos` " +
+                                 " WHERE `TIPO` = @tipo ";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@tipo", Nombre);
 
                     oConexion.Open();
                     cmd.ExecuteNonQuery();

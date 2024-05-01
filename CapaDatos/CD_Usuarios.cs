@@ -203,7 +203,7 @@ namespace CapaDatos
             
         }
 
-        public string ActualizarUsuario(Usuario oUsuario)
+        public bool ActualizarUsuario(Usuario oUsuario)
         {
             try
             {
@@ -231,18 +231,18 @@ namespace CapaDatos
                     cmd.ExecuteNonQuery();
                     oConexion.Close();
 
-                    return ("Actualizacion completada");
+                    return true;
 
                 }
             }
             catch (Exception ex)
             {
-                return ("Ha ocurrido un error con la actualizacion");
+                return false;
             }
 
         }
 
-        public string ActualizarUbicacion(Ubicacion oUbicacion)
+        public bool ActualizarUbicacion(Ubicacion oUbicacion)
         {
             try
             {
@@ -270,14 +270,14 @@ namespace CapaDatos
                     cmd.ExecuteNonQuery();
                     oConexion.Close();
 
-                    return ("Actualizacion completada");
+                    return true;
 
                 }
 
             }
             catch(Exception ex)
             {
-                return null;
+                return false;
             }
         }
 

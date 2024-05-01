@@ -394,6 +394,13 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\scriptsPla.js" />
+    <Content Include="Scripts\Views\Home\Index.js" />
+    <Content Include="Scripts\Views\Home\ListarPlatillo.js" />
+    <Content Include="Scripts\Views\Login\Registrar.js" />
+    <Content Include="Scripts\Views\Login\Registrar_Restaurante.js" />
+    <Content Include="Scripts\Views\Usuario\ModRestaurante.js" />
+    <Content Include="Scripts\Views\Usuario\ModUsuario.js" />
+    <Content Include="Scripts\Views\_Layout\_Layout.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -430,6 +437,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Fondos\" />
     <Folder Include="Images\Platillos\" />
     <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />

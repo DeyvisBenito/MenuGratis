@@ -8,6 +8,9 @@ using CapaDatos;
 using MenuGratis.Filtros;
 using System.IO;
 using Microsoft.Ajax.Utilities;
+using Mysqlx;
+using Mysqlx.Crud;
+using Google.Protobuf.Collections;
 
 namespace MenuGratis.Controllers
 {
@@ -32,36 +35,7 @@ namespace MenuGratis.Controllers
             return View();
         }
 
-
-
-        [HttpPost]
-        [ValidadSesion]
-        public ActionResult AgregarSeccion(string nom)
-        {
-            try
-            {
-                Usuario oUser = Session["Usuario"] as Usuario;
-                CD_Secciones cd_p= new CD_Secciones();
-                Secciones sec = new Secciones();
-
-                sec.Nombre = nom;
-                sec.Id_res = oUser.ID;
-
-                bool resp=cd_p.Agregar(sec);
-
-                if (resp)
-                {
-                    return RedirectToAction("ListarPlatillo", "Home");
-                }
-
-            }catch (Exception ex)
-            {
-
-            }
-            return null;
-        }
-
-        
+  
 
         [ValidadSesion]
         public ActionResult ListarPlatillo() //Vista de platillos, mostrara todos los platillos
@@ -342,9 +316,9 @@ namespace MenuGratis.Controllers
                 }
 
             }
-            catch
+            catch (Exception e)
             {
-                return Json(new { success = false });
+                return Json(new { success = false, error = e.Message });
             }
         }
 
@@ -386,6 +360,170 @@ namespace MenuGratis.Controllers
             return list;
         }
 
-       
+
+        [HttpPost]
+        [ValidadSesion]
+        public JsonResult AgregarSeccion(string nombreSeccion)
+        {
+            try
+            {
+                Usuario oUser = Session["Usuario"] as Usuario;
+                CD_Secciones cd_s = new CD_Secciones();
+                Secciones sec = new Secciones();
+
+                List<Secciones> listSec = cd_s.listarSec(oUser.ID);
+
+                foreach (Secciones lsec in listSec)
+                {
+                    if (lsec.Nombre == nombreSeccion)
+                    {
+                        return Json(new { success = false });
+                    }
+                }
+
+                sec.Nombre = nombreSeccion;
+                sec.Id_res = oUser.ID;
+
+                bool resp = cd_s.Agregar(sec);
+
+                if (resp)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = ex.Message });
+            }
+
+        }
+
+
+        [ValidadSesion]
+        [HttpPost]
+        public JsonResult EliminarSeccion(int Id_se)
+        {
+            try
+            {
+                CD_Secciones cd_sec = new CD_Secciones();
+                Secciones oSec=cd_sec.buscarSeccion(Id_se);
+
+                CD_Platillos cd_pla = new CD_Platillos();
+                bool resp = cd_pla.eliminarPlatillo(oSec.Nombre);
+
+                if(resp)
+                {
+                    bool respSe = cd_sec.eliminarSeccion(Id_se);
+                    if (respSe)
+                    {
+                        return Json(new { success = true });
+                    }
+                    else
+                    {
+                        return Json(new { success = false});
+                    }
+                }
+                else
+                {
+                    return Json(new { success = false});
+                }
+
+
+
+            }catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = ex.Message });
+            }
+        }
+
+        [ValidadSesion]
+        [HttpGet]
+        public JsonResult detallarSeccion(int Id_se)
+        {
+            try
+            {
+
+                CD_Secciones cd_se = new CD_Secciones();
+                Secciones oSec = cd_se.buscarSeccion(Id_se);
+
+                return Json(oSec, JsonRequestBehavior.AllowGet);
+
+            }catch (Exception ex)
+            {
+                return Json(new { success = false }, ex.Message);
+            }
+        }
+
+        [ValidadSesion]
+        [HttpPost]
+        public JsonResult editSeccion(int Id_se, string nombre, string nombreOrig)
+        {
+            try
+            {
+                
+                Secciones sec=new Secciones();
+                sec.Id_se = Id_se;
+                sec.Nombre = nombre;
+
+                CD_Secciones cd_sec = new CD_Secciones();
+                bool resp=cd_sec.editarSeccion(sec);
+
+                if (resp)
+                {
+                    CD_Platillos cd_pla = new CD_Platillos();
+                    bool respPla = cd_pla.modificarPlatillo(nombre, nombreOrig);
+
+                    if (respPla)
+                    {
+                        return Json(new { success = true });
+                    }
+                    else
+                    {
+                        return Json(new { success = false });
+                    }
+
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+
+                
+            }catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = ex.Message });
+            }
+        }
+
+        [ValidadSesion]
+        [HttpPost]
+        public JsonResult validarSeccion(string nombre)
+        {
+            try
+            {
+                Usuario oUser = Session["Usuario"] as Usuario;
+                CD_Secciones cd_sec = new CD_Secciones();
+                List<Secciones> listSec = cd_sec.listarSec(oUser.ID);
+                foreach (Secciones lsec in listSec)
+                {
+                    if (lsec.Nombre == nombre)
+                    {
+                        return Json(new { success = false });
+                    }
+                }
+                return Json(new { success = true });
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new {success = true, errorMessage = ex.Message});
+            }
+        }
+
     }
 }
