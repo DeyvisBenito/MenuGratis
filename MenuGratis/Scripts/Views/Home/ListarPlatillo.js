@@ -95,15 +95,22 @@ function mostrarFormulario() {
 
 // Función para cargar las secciones en el select
 function cargarSecciones() {
-    // Realizar una solicitud AJAX para obtener las secciones disponibles del servidor
     $.ajax({
-        url: url_ObtenerSecciones, // Ruta al controlador que devuelve las secciones
+        url: url_ObtenerSecciones, 
         type: 'GET',
         success: function (response) {
-            // Limpiar las opciones actuales del select
+
+            if (response.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Agrega una seccion primero'
+                });
+                return; 
+            }
+
             $('#opciones').empty();
 
-            // Agregar una opción predeterminada al select
             $('#opciones').append($('<option>', {
                 value: '',
                 text: 'Selecciona el tipo de platillo',
@@ -111,7 +118,6 @@ function cargarSecciones() {
                 selected: true
             }));
 
-            // Agregar cada sección como una opción en el select
             response.forEach(function (seccion) {
                 $('#opciones').append($('<option>', {
                     value: seccion.Id,
@@ -120,7 +126,6 @@ function cargarSecciones() {
             });
         },
         error: function (xhr, status, error) {
-            // En caso de error, mostrar mensaje
             console.error(xhr.responseText);
             Swal.fire({
                 icon: 'error',
@@ -140,7 +145,7 @@ function mostrarFormularioEdit(Id_platillo) {
         success: function (response) {
             if (response) {
                 // Llenar el modal con los detalles del platillo
-                cargarSeccionesPla(Id_platillo); // Llamar a la función cargarSecciones para rellenar el select de opciones
+                cargarSeccionesPla(Id_platillo); 
 
 
                 Swal.fire({
@@ -257,16 +262,14 @@ function mostrarFormularioEdit(Id_platillo) {
 }
 
 function cargarSeccionesPla(Id_platillo) {
-    // Realizar una solicitud AJAX para obtener las secciones disponibles del servidor
     $.ajax({
         url: url_obtenerSecciones2,
         type: 'GET',
         data: { Id_platillo: Id_platillo },
         success: function (response) {
-            // Limpiar las opciones actuales del select
+
             $('#opciones').empty();
 
-            // Agregar una opción predeterminada al select
             $('#opciones').append($('<option>', {
                 value: '',
                 text: 'Puedes seleccionar otra sección',
@@ -274,7 +277,6 @@ function cargarSeccionesPla(Id_platillo) {
                 selected: true
             }));
 
-            // Iterar sobre las secciones devueltas en la respuesta
             $.each(response.Secciones, function (index, seccion) {
                 $('#opciones').append($('<option>', {
                     value: seccion.Id,
@@ -282,17 +284,14 @@ function cargarSeccionesPla(Id_platillo) {
                 }));
             });
 
-            // Acceder al platillo
             var platillo = response.Platillo;
 
-            // Verificar si el ID del platillo coincide con el ID pasado como parámetro
+
             if (Id_platillo == platillo.Id_platillo) {
-                // Establecer el valor del select con el tipo del platillo
                 $('#opciones').val(platillo.Tipo);
             }
         },
         error: function (xhr, status, error) {
-            // En caso de error, mostrar mensaje
             console.error(xhr.responseText);
             Swal.fire({
                 icon: 'error',
@@ -304,7 +303,6 @@ function cargarSeccionesPla(Id_platillo) {
 }
 
 function eliminar(Id_platillo) {
-    // Mostrar un mensaje de confirmación antes de eliminar el platillo
     Swal.fire({
         title: '¿Estás seguro?',
         text: 'Una vez eliminado, no podrás recuperar este platillo.',
@@ -316,7 +314,7 @@ function eliminar(Id_platillo) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Si el usuario confirma la eliminación, enviar la solicitud al controlador
+
             var data = {
                 Id_platillo: Id_platillo
             };
