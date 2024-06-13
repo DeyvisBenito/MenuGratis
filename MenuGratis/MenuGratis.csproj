@@ -367,6 +367,8 @@
     <Content Include="obj\Debug\MenuGratis.csproj.AssemblyReference.cache" />
     <Content Include="obj\Debug\MenuGratis.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\MenuGratis.csproj.Up2Date" />
+    <None Include="Properties\PublishProfiles\deyben-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\deyben-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
